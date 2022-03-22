@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,35 +16,35 @@ use Illuminate\Http\Request;
 |
 */
 // thu muc resources/view/welcome.blade.php
-Route::get('/', function () {
-    $students =[
-        [
-            "name"=>"Đinh Công Thành",
-            "age"=>"30",
-            "class"=>"23123",
-            "id"=>"2"
-        ],  [
-            "name"=>"Đinh Công Thành",
-            "age"=>"30",
-            "class"=>"23123",
-            "id"=>"2"
-        ],  [
-            "name"=>"Đinh Công Thành",
-            "age"=>"30",
-            "class"=>"23123",
-            "id"=>"2"
-        ],
-        [
-            "name"=>"Đinh Công Thành",
-            "age"=>"30",
-            "class"=>"23123",
-            "id"=>"2"
-        ]
+// Route::get('/', function () {
+//     $students =[
+//         [
+//             "name"=>"Đinh Công Thành",
+//             "age"=>"30",
+//             "class"=>"23123",
+//             "id"=>"2"
+//         ],  [
+//             "name"=>"Đinh Công Thành",
+//             "age"=>"30",
+//             "class"=>"23123",
+//             "id"=>"2"
+//         ],  [
+//             "name"=>"Đinh Công Thành",
+//             "age"=>"30",
+//             "class"=>"23123",
+//             "id"=>"2"
+//         ],
+//         [
+//             "name"=>"Đinh Công Thành",
+//             "age"=>"30",
+//             "class"=>"23123",
+//             "id"=>"2"
+//         ]
         
         
-    ];
-    return view('welcome',['students'=>$students]);
-});
+//     ];
+//     return view('welcome',['students'=>$students]);
+// });
 // thu muc resources/view/auth/login.blade.php => auth.login
 
 Route::get('/login',function(){
@@ -70,7 +72,7 @@ Route::get('/user/{userId?} ', function (Request $request ,$userId="1" ) {
     return view ('lab1',['userId'=>$userId , 'data'=>$data, 'user'=>$user]);
 });
 
-Route::get('/home', function () {
+Route::get('/', function () {
     $students =[
         [
             "name"=>"Đinh Công Thành",
@@ -98,5 +100,20 @@ Route::get('/home', function () {
         
     ];
     return view('home',['students'=>$students]);
+})->name('home');
+// Route::get('/categories',[CategoryController::class,'index'])->name('categories');
+// prefix : duong dan chung cau group, noi ->/categories/create
+// name: name chung cau group, noi cac name con :categories.index
+Route::prefix('/categories')->name('categories.')->group(function(){
+    Route::get('/',[CategoryController::class,'index'])->name('index');
+    Route::get('/add',[CategoryController::class,'add'])->name('add');
 });
 
+
+Route::get('/product',function (){
+    return view('product.index');
+});
+Route::prefix('/product')->name('product.')->group(function(){
+    Route::get('/',[ProductController::class,'index'])->name('index');
+    Route::get('/store',[ProductController::class,'store'])->name('store');
+});
