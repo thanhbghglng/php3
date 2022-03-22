@@ -106,7 +106,11 @@ Route::get('/', function () {
 // name: name chung cau group, noi cac name con :categories.index
 Route::prefix('/categories')->name('categories.')->group(function(){
     Route::get('/',[CategoryController::class,'index'])->name('index');
-    Route::get('/add',[CategoryController::class,'add'])->name('add');
+    Route::get('/create',[CategoryController::class,'create'])->name('create');
+    Route::post('/store',[CategoryController::class,'store'])->name('store');
+    Route::delete('/{id}',[CategoryController::class,'delete'] )->name('delete');
+        
+
 });
 
 
