@@ -13,16 +13,26 @@ class ProductController extends Controller
         return view('product.index',['products'=>$products]);
     }
     //tao ban ghi product moi Requet $request
-    public function store()
+    public function create()
     {
         //
-        return view('product.store');
+        return view('product.create');
     }
-
+    // luu ban ghi vao database
+    public function store(Request $request)
+    {
+        $productRequest = request::all();
+        $product = new Product();
+        
+    }
     // tra ve thong tin ban ghi theo id 
     public function show($id)
     {
         //
+        
+        $productDetail = Product::all()->where('id','=',$id);
+        // dd($productDetail);
+        return view('product.show',['productDetail'=>$productDetail]);
     }
 
     // cap nhat thong tin cua 1 ban ghi 
@@ -31,9 +41,13 @@ class ProductController extends Controller
         //
     }
     // xoa 1 ban ghi product
-    public function destroy($id)
+    public function delete(Product $id)
     {
         //
+        if($id->delete()){
+            return redirect()->route('product.index');
+        }
+
     }
 }
 

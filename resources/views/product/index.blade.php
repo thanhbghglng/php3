@@ -2,6 +2,9 @@
 @section('title','Product Page')
 @section('content-title','Product Page')
 @section('content')
+<div>
+    <a href="{{route('product.create')}}"><button class="btn btn-primary">Create</button></a>
+</div>
 <table class="table table-hover">
     <thead>
         <th>ID</th>
@@ -17,18 +20,23 @@
         <th>Updated at</th>
     </thead>
     <tbody>
+       
         @foreach ($products as $product)
+        
                 <tr>
+                    
                     <td>{{ $product->id }}</td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->description ?: 'N/A' }}</td>
                     <td>{{$product->short_description}} </td>
+                    <td>{{$product->price}} </td>
                     <td>{{ $product->thumbnail_url ?: 'N/A' }}</td>
                     <td>{{$product->quantity}} </td>
                     <td>{{ $product->status == 1 ? 'Active' : 'Deactive' }}</td>
                     <td>{{$product->category_id}} </td>
                     <td>{{ $product->created_at ?: 'N/A' }}</td>
                     <td>{{ $product->updated_at ?: 'N/A' }}</td>
+                    
                 </tr>
         @endforeach
     </tbody>

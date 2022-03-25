@@ -18,7 +18,8 @@ class CategoryController extends Controller
         $categoriesGet = Category::select('id','name','description','slug','created_at','updated_at')
         // ->where('id','>',3)
         // ->get();
-        ->paginate(10);
+        ->orderBy('id','DESC')
+        ->paginate(5);
         return view('category.index',['categories'=>$categoriesGet]);
         // dd('danh sach category',$categories,$categoriesGet);
     }
@@ -37,6 +38,31 @@ class CategoryController extends Controller
         $category->slug=Str::slug($categoryRequest['name']);
         $category->save();
         return redirect()->route('categories.index');
+    }
+
+    public function edit(Category $id)
+    {
+        $categoryEdit = $id;
+        // dd($categoryEdit);
+        return view('category.edit',['categoryEdit'=>$categoryEdit]);
+
+    }
+
+
+    public function update(Request $request,$id)
+    {
+        $categoryRequest = $request->all();
+        $category = Category::find($id);
+        $category->name=$categoryRequest['name'];
+        $category->description=$categoryRequest['description'];
+        $category->status=$categoryRequest['status'];
+        $category->slug=Str::slug($categoryRequest['name']);
+        // dd($category);
+        $category->save();
+        
+        return redirect()->route('categories.index');
+
+      
     }
 
 

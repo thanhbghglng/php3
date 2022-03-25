@@ -35,7 +35,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="/" class="nav-link">
+            <a href="/" class="nav-link @yield('active') ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -45,12 +45,21 @@
             
           </li>
           
-          <li class="nav-item menu-open">
-            <a href="/categories" class="nav-link active">
+          <li class="nav-item ">
+            <a href="/categories" class="nav-link {{Route::is('categories.*')? 'active':''}} ">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Category
                 {{-- <i class="fas fa-angle-left right"></i> --}}
+              </p>
+            </a>
+            
+          </li>
+          <li class="nav-item ">
+            <a href="/product" class="nav-link {{Route::is('product.*')? 'active':''}} ">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Product
               </p>
             </a>
             

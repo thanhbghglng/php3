@@ -105,19 +105,26 @@ Route::get('/', function () {
 // prefix : duong dan chung cau group, noi ->/categories/create
 // name: name chung cau group, noi cac name con :categories.index
 Route::prefix('/categories')->name('categories.')->group(function(){
+    // danh sach
     Route::get('/',[CategoryController::class,'index'])->name('index');
+    // tao moi 
     Route::get('/create',[CategoryController::class,'create'])->name('create');
     Route::post('/store',[CategoryController::class,'store'])->name('store');
+    // chinh sua 
+    Route::get('/edit/{id}',[CategoryController::class,'edit'])->name('edit');
+    Route::put('/update/{id}',[CategoryController::class,'update'])->name('update');
+    // xoa
     Route::delete('/{id}',[CategoryController::class,'delete'] )->name('delete');
         
 
 });
 
 
-Route::get('/product',function (){
-    return view('product.index');
-});
+
 Route::prefix('/product')->name('product.')->group(function(){
     Route::get('/',[ProductController::class,'index'])->name('index');
-    Route::get('/store',[ProductController::class,'store'])->name('store');
+    Route::get('/create',[ProductController::class,'create'])->name('create');
+    Route::post('/store',[ProductController::class,'store'])->name('store');
+    Route::get('/show/{id?}',[ProductController::class,'show'])->name('show');
+    Route::delete('/{id}',[ProductController::class,'delete'])->name('delete');
 });

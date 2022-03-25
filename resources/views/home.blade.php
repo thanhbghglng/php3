@@ -4,6 +4,7 @@
 {{--  section se thay doi phan yield trong master voi ten tuong ung --}}
 @section('title','Home Page Admin LTE')
 @section('content-title','Dash Board')
+@section('active','active')
 @section('content')
 <table class="table table-hover">
     <thead>
@@ -15,12 +16,15 @@
     </thead>
     <tbody>
         @foreach ($students as $student)
-            <tr>
+            <tr  >
+               
+           
                 <td>{{$student['name']}}</td>
                 <td>{{$student['age']}}</td>
                 <td>{{$student['class']}}</td>
                 <td>{{$student['id']}}</td>
                 <td><img src="" alt=""></td>
+        
             </tr>
         @endforeach
     
