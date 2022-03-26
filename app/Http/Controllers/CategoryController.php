@@ -30,12 +30,21 @@ class CategoryController extends Controller
     }
     public function store(Request $request)
     {
+
+        // validate
+        $request->validate([
+            'name' => 'required',
+            'description'=>'required'
+            
+        ]);
+        // neu co loi trong dieu kien truyen vao se tu dong ket thuc ham va quay tro lai form kem bien error
         $categoryRequest = $request->all();
         $category = new Category();
         $category->name=$categoryRequest['name'];
         $category->description=$categoryRequest['description'];
         $category->status=$categoryRequest['status'];
         $category->slug=Str::slug($categoryRequest['name']);
+        // dd($category);
         $category->save();
         return redirect()->route('categories.index');
     }
@@ -44,19 +53,18 @@ class CategoryController extends Controller
     {
         $categoryEdit = $id;
         // dd($categoryEdit);
-        return view('category.edit',['categoryEdit'=>$categoryEdit]);
+        return view('category.create',['category'=>$categoryEdit]);
 
     }
 
 
-    public function update(Request $request,$id)
+    public function update(Request $request, Category $id)
     {
-        $categoryRequest = $request->all();
-        $category = Category::find($id);
-        $category->name=$categoryRequest['name'];
-        $category->description=$categoryRequest['description'];
-        $category->status=$categoryRequest['status'];
-        $category->slug=Str::slug($categoryRequest['name']);
+        $category = $id;
+        $category->name=$request->name;
+        $category->description=$request->description;
+        $category->status=$request->status;
+        $category->slug=Str::slug($request->name). '-'.uniqid();
         // dd($category);
         $category->save();
         
