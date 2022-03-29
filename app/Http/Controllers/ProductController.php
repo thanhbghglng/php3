@@ -10,7 +10,12 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('product.index',['products'=>$products]);
+        $productGet =Product::select('id','name','description','short_description','thumbnail_url','quantity','category_id','created_at','updated_at','price')
+        // ->get()
+        ->orderby('id','DESC')
+        ->paginate(5);
+        return view('product.index',['products'=>$productGet]);
+
     }
     //tao ban ghi product moi Requet $request
     public function create()

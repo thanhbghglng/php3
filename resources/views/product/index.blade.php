@@ -18,6 +18,7 @@
         <th>Category ID</th>
         <th>Created at</th>
         <th>Updated at</th>
+        <th>Action</th>
     </thead>
     <tbody>
        
@@ -30,15 +31,31 @@
                     <td>{{ $product->description ?: 'N/A' }}</td>
                     <td>{{$product->short_description}} </td>
                     <td>{{$product->price}} </td>
-                    <td>{{ $product->thumbnail_url ?: 'N/A' }}</td>
+                    <td><img height="100" src="{{ $product->thumbnail_url ?: 'N/A' }}" alt=""></td>
                     <td>{{$product->quantity}} </td>
                     <td>{{ $product->status == 1 ? 'Active' : 'Deactive' }}</td>
                     <td>{{$product->category_id}} </td>
                     <td>{{ $product->created_at ?: 'N/A' }}</td>
                     <td>{{ $product->updated_at ?: 'N/A' }}</td>
+                    <td>
+                        
+
+                        <form 
+                        action="{{route('product.delete',$product->id)}} "
+                        method="POST"
+                        
+                        >
+                        @method('DELETE')
+                        {{-- <input type="text" name="_method" value="DELETE"> --}}
+                        @csrf
+                        {{-- <input type="text" name="csrf" value="asdasddas"> --}}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
                     
                 </tr>
         @endforeach
     </tbody>
 </table>
+{{$products->links()}}
 @endsection
