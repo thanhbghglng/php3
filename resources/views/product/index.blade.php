@@ -12,8 +12,7 @@
         <th>price</th>
         <th>Thumbnail</th>
         <th>Category</th>
-        <th>Created at</th>
-        <th>Updated at</th>
+        <th>News</th>
         <th>Action</th>
     </thead>
     <tbody>
@@ -26,8 +25,10 @@
                     <td>{{$product->price}} </td>
                     <td><img height="100" src="{{ $product->thumbnail_url ?: 'N/A' }}" alt=""></td>
                     <td>{{$product->category->name}} </td>
-                    <td>{{ $product->created_at ?: 'N/A' }}</td>
-                    <td>{{ $product->updated_at ?: 'N/A' }}</td>
+                    {{-- {{dd($product->newsProducts->name)}} --}}
+                    <td> @foreach ($product->newsProducts as $productItem)
+                        <p>{{$productItem->title}}</p>
+                    @endforeach </td>
                     <td>
                         
                         <a class="btn btn-primary" href=" ">Edit</a>

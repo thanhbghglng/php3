@@ -12,9 +12,11 @@ class ProductController extends Controller
         $products = Product::all();
         $productGet =Product::select('id','name','description','short_description','thumbnail_url','quantity','category_id','created_at','updated_at','price')
         // ->get()
-        ->with('category')
+        ->with('category:id,name')
+        ->with('newsProducts:id,title')
         ->orderby('id','DESC')
         ->paginate(5);
+        // dd($productGet);
         return view('product.index',['products'=>$productGet]);
 
     }
