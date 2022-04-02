@@ -18,9 +18,11 @@ class CategoryController extends Controller
         $categoriesGet = Category::select('id','name','description','slug','created_at','updated_at')
         // ->where('id','>',3)
         // ->get();
-        ->withCount('productsnn')
+        ->with('products')
+        ->with('news')
         ->orderBy('id','DESC')
         ->paginate(5);
+        // dd($categoriesGet);
         return view('category.index',['categories'=>$categoriesGet]);
         // dd('danh sach category',$categories,$categoriesGet);
     }
