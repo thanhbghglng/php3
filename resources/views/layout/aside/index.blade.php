@@ -64,6 +64,15 @@
             </a>
             
           </li>
+          <li class="nav-item ">
+            <a href="/news" class="nav-link {{Route::is('news.*')? 'active':''}} ">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                News
+              </p>
+            </a>
+            
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -18,6 +18,7 @@ class CategoryController extends Controller
         $categoriesGet = Category::select('id','name','description','slug','created_at','updated_at')
         // ->where('id','>',3)
         // ->get();
+        ->withCount('productsnn')
         ->orderBy('id','DESC')
         ->paginate(5);
         return view('category.index',['categories'=>$categoriesGet]);
@@ -51,9 +52,11 @@ class CategoryController extends Controller
 
     public function edit(Category $id)
     {
-        $categoryEdit = $id;
+        $products = $id->productsnn()->select('name')->paginate(5) ;
         // dd($categoryEdit);
-        return view('category.create',['category'=>$categoryEdit]);
+        // dd($id->productsnn()->select('name')->get());
+        // dd($categoryEdit);
+        return view('category.create',['category'=>$id,'products'=>$products]);
 
     }
 

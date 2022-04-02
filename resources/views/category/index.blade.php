@@ -14,7 +14,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Description</th>
-        <th>Slug</th>
+        <th>Product</th>
         <th>Status</th>
         <th>Created at</th>
         <th>Updated at</th>
@@ -22,13 +22,13 @@
     </thead>
     <tbody>
         @foreach ($categories as $category)
-       
+        {{-- {{dd($categories)}} --}}
                 <tr  >
                     
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->description ?: 'N/A' }}</td>
-                    <td>{{ $category->slug ?: 'N/A' }}</td>
+                    <td>{{ $category->productsnn_count }}</td>
                     <td>{{ $category->status==1?'Active':'Deactive'  }}</td>
                     <td>{{ $category->created_at ?: 'N/A' }}</td>
                     <td>{{ $category->updated_at ?: 'N/A' }}</td>

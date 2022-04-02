@@ -17,7 +17,23 @@ class Product extends Model
         'thumbnail_url',
         'quantity',
         'status',
-        'category_id'
+        'category_id',
+        
 
     ];
+    /**
+     * Get the category that owns the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+    public function categorynn(){
+        return $this->belongsToMany(Category::class,'category_product','product_id','category_id');
+    }
+    public function newsProducts(){
+        return $this->belongsToMany(News::class,'news_product','product_id','news_id');
+    }
 }

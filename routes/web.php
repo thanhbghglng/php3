@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -127,4 +128,8 @@ Route::prefix('/product')->name('product.')->group(function(){
     Route::post('/store',[ProductController::class,'store'])->name('store');
     Route::get('/show/{id?}',[ProductController::class,'show'])->name('show');
     Route::delete('/{id}',[ProductController::class,'delete'])->name('delete');
+});
+Route::prefix('/news')->name('news.')->group(function () {
+        Route::get('/',[NewsController::class,'index'])->name('index');
+        Route::delete('/delete/{id}',[NewsController::class,'delete'])->name('delete');
 });
